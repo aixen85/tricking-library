@@ -13,7 +13,10 @@ jobs:
         run: pwd
       - name: List Filed in Directory
         run: ls
+      - name: Check dotnet
+        run: dotnet build
+      - name: List Filed in Directory
+        run: ls TrickingLibrary.Api/ -R
       - name: Run NPM
         run: npm -version
-      - name: Run dotnet
-        run: dotnet -version
+      
