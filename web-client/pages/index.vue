@@ -15,7 +15,7 @@
       </div>
       <v-card>
         <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
+          {{ message }}
         </v-card-title>
         <v-card-text>
           <p>Vuetify is a progressive Material Design component framework for Vue.js. It was designed to empower developers to create amazing applications.</p>
@@ -82,11 +82,22 @@
 <script>
 import Logo from '~/components/Logo.vue'
 import VuetifyLogo from '~/components/VuetifyLogo.vue'
+import Axios from "axios";
+import error from "@/layouts/error";
 
 export default {
   components: {
     Logo,
     VuetifyLogo
+  },
+  data: () => ({
+    message: ""
+  }),
+  asyncData(payload){
+    return Axios.get("http://localhost:5000/api/home")
+      .then(({data}) => {
+        return { message: data }
+      }).catch(error => console.log(error))
   }
 }
 </script>
